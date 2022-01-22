@@ -20,14 +20,15 @@
     <div class="page-title">
       お見積り情報入力
     </div>
-    <ul th:if="${#fields.hasErrors('all')}">
-      <li th:each="err : ${#fields.errors('all')}" th:text="${err}"></li>
-    </ul>
+
     <div class="col-sm-12">
       <fieldset>
         <div class="sub-title">お客様情報</div>
         <div class="form-group">
           <label for="customerName">氏名</label>
+          <span th:if="${#fields.hasErrors('customerName')}">
+            <p th:each="err : ${#fields.errors('customerName')}" th:text="${err}"></p>
+          </span>
           <input type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎"/>
         </div>
         <div class="form-group">
