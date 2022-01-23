@@ -68,7 +68,7 @@
             <font color="red"><p th:each="err : ${#fields.errors('oldAddress')}" th:text="${err}"></p></font>
           </span>
           <input type="text" id="oldAddress" name="oldAddress" th:field="*{oldAddress}"
-                 class="form-control" value="新宿区西新宿1-1-1" placeholder="札幌市南区1-2"/>
+                 class="form-control" value="新宿区西新宿1-1-1" placeholder="例）札幌市南区1-2"/>
           <div class="form-group">
           <label for="newPrefectureId">お届け先住所（都道府県）</label>
           <select id="newPrefectureId" name="newPrefectureId" class="form-control">
@@ -82,7 +82,7 @@
             <font color="red"><p th:each="err : ${#fields.errors('newAddress')}" th:text="${err}"></p></font>
           </span>
           <input type="text" id="newAddress" name="newAddress" th:field="*{newAddress}" class="form-control"
-                 value="札幌市南区1" placeholder="札幌市南区1"/>
+                 value="札幌市南区1" placeholder="例）札幌市南区1"/>
         </div>
       </fieldset>
       <fieldset>
