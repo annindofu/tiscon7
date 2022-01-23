@@ -40,9 +40,8 @@ public class UserOrderForm {
     @NotBlank
     private String box;
 
-    @Numeric
     @NotBlank
-    private String date;
+    private String dates;
 
     @Numeric
     @NotBlank
@@ -83,12 +82,12 @@ public class UserOrderForm {
         this.email = email;
     }
 
-    public String getDate() {
-        return date;
+    public String getDates() {
+        return dates;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDates(String dates) {
+        this.dates = dates;
     }
 
     public String getOldPrefectureId() {
