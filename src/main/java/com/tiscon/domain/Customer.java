@@ -6,6 +6,8 @@ public class Customer implements Serializable {
 
     private Integer customerId;
 
+    private String dates;
+
     private String oldPrefectureId;
 
     private String newPrefectureId;
@@ -26,6 +28,12 @@ public class Customer implements Serializable {
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public String getDates() { return dates; }
+
+    public void setDates(String dates) {
+        this.dates = dates;
     }
 
     public String getOldPrefectureId() {
