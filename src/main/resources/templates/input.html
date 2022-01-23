@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
   <title>お見積り情報入力</title>
@@ -13,7 +13,8 @@
 <body>
 <nav th:insert="header.html :: header"></nav>
 <div class="container">
-  <form th:action="@{/submit}" th:object="${userOrderForm}" class="form-horizontal" method="post">
+  <form th:action="@{/submit}" th:object="${userOrderForm}" class="form-horizontal" method="post"
+  oninput="sum.value = Number(box.value) + Number(bed.value)*20 + Number(bicycle.value)*15 + Number(washingMachine.value)*10;">
     <div class="progress-icon">
       <img src="../img/progress_input.svg" />
     </div>
@@ -29,29 +30,31 @@
           <span th:if="${#fields.hasErrors('customerName')}">
             <p th:each="err : ${#fields.errors('customerName')}" th:text="${err}"></p>
           </span>
-          <input type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎"/>
+          <input type="text" id="customerName" name="customerName" th:field="*{customerName}" class="form-control" value="山田太郎" placeholder="山田太郎"/>
         </div>
         <div class="form-group">
           <label for="tel">連絡先TEL</label>
           <span th:if="${#fields.hasErrors('tel')}">
             <p th:each="err : ${#fields.errors('tel')}" th:text="${err}"></p>
           </span>
-          <input type="tel" id="tel" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678"/>
+          <input type="tel" id="tel" max="11" name="tel" th:field="*{tel}" class="form-control" value="03-1234-5678" placeholder="09000000000"/>
         </div>
         <div class="form-group">
           <label for="email">連絡先メールアドレス</label>
           <span th:if="${#fields.hasErrors('email')}">
             <p th:each="err : ${#fields.errors('email')}" th:text="${err}"></p>
           </span>
-          <input type="text" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com"/>
+          <input type="text" id="email" name="email" th:field="*{email}" class="form-control" value="test@test.com" placeholder="test@test.com"/>
         </div>
+
         <div class="sub-title">集荷元・お届け先</div>
+        <div class="sub-title">引っ越し日程</div>
         <div class="form-group">
-          <label for="date">引っ越し月</label>
-          <span th:if="${#fields.hasErrors('date')}">
-            <p th:each="err : ${#fields.errors('date')}" th:text="${err}"></p>
+          <label for="dates">引っ越し日程</label>
+          <span th:if="${#fields.hasErrors('dates')}">
+            <p th:each="err : ${#fields.errors('dates')}" th:text="${err}"></p>
           </span>
-          <input type="text" id="date" name="date" th:field="*{date}" class="form-control" value=""/>
+          <input type="date" id="dates" name="dates" th:field="*{dates}" class="form-control" value=""/>
         </div>
         <div class="form-group">
           <label for="oldPrefectureId">集荷元住所（都道府県）</label>
@@ -65,9 +68,8 @@
             <p th:each="err : ${#fields.errors('oldAddress')}" th:text="${err}"></p>
           </span>
           <input type="text" id="oldAddress" name="oldAddress" th:field="*{oldAddress}"
-                 class="form-control" value="新宿区西新宿1-1-1"/>
-        </div>
-        <div class="form-group">
+                 class="form-control" value="新宿区西新宿1-1-1" placeholder="札幌市南区1-2"/>
+          <div class="form-group">
           <label for="newPrefectureId">お届け先住所（都道府県）</label>
           <select id="newPrefectureId" name="newPrefectureId" class="form-control">
             <option th:each="prefecture : ${prefectures}" th:value="${prefecture.prefectureId}" th:field="*{newPrefectureId}">[[${prefecture.prefectureName}]]</option>
@@ -79,7 +81,7 @@
             <p th:each="err : ${#fields.errors('newAddress')}" th:text="${err}"></p>
           </span>
           <input type="text" id="newAddress" name="newAddress" th:field="*{newAddress}" class="form-control"
-                 value="札幌市南区1"/>
+                 value="札幌市南区1" placeholder="札幌市南区1"/>
         </div>
       </fieldset>
       <fieldset>
@@ -89,30 +91,33 @@
           <span th:if="${#fields.hasErrors('box')}">
             <p th:each="err : ${#fields.errors('box')}" th:text="${err}"></p>
           </span>
-          <input type="text" id="box" name="box" th:field="*{box}" class="form-control" value="10"/>
+          <input type="number" min="0" max="200" id="box" name="box" th:field="*{box}" class="form-control" value="10"/>
         </div>
         <div class="form-group">
-          <label for="bed">ベッドの個数</label>
+          <label for="bed">ベッドの個数 ベット１つにつき段ボール20個分</label>
           <span th:if="${#fields.hasErrors('bed')}">
             <p th:each="err : ${#fields.errors('bed')}" th:text="${err}"></p>
           </span>
-          <input type="text" id="bed" name="bed" th:field="*{bed}" class="form-control" value="3"/>
+          <input type="number" min="0" max="10" id="bed" name="bed" th:field="*{bed}" class="form-control" value="3"/>
         </div>
         <div class="form-group">
-          <label for="bicycle">自転車の個数</label>
+          <label for="bicycle">自転車の個数　自転車１つにつき段ボール15個分</label>
           <span th:if="${#fields.hasErrors('bicycle')}">
             <p th:each="err : ${#fields.errors('bicycle')}" th:text="${err}"></p>
           </span>
-          <input type="text" id="bicycle" name="bicycle" th:field="*{bicycle}" class="form-control" value="1"/>
+          <input type="number" min="0" max="13" id="bicycle" name="bicycle" th:field="*{bicycle}" class="form-control" value="1"/>
         </div>
         <div class="form-group">
-          <label for="washingMachine">洗濯機の個数</label>
+          <label for="washingMachine">洗濯機の個数 洗濯機１つにつき段ボール10個分</label>
           <span th:if="${#fields.hasErrors('washingMachine')}">
             <p th:each="err : ${#fields.errors('washingMachine')}" th:text="${err}"></p>
           </span>
-          <input type="text" id="washingMachine" name="washingMachine" th:field="*{washingMachine}" class="form-control"
+          <input type="number" min="0" max="15" id="washingMachine" name="washingMachine" th:field="*{washingMachine}" class="form-control"
                  value="1"/>
         </div>
+
+        <font size="5">
+          総段ボール数：<output  name="sum" for="fox bed bicycle washingMachine" >0</output></font><br><br>
         <div class="form-group">
           <label for="washingMachineInstallation">洗濯機の設置工事申し込み</label>
           <select id="washingMachineInstallation" name="washingMachineInstallation" class="form-control" th:field="*{washingMachineInstallation}">
