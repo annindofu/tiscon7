@@ -45,16 +45,23 @@
         </tr>
         </tbody>
         </table>
-      <div class="sub-title">集荷元・お届け先</div>
+      <div class="sub-title">引っ越し日程</div>
       <table class="table table-bordered">
         <col span="1" style="background-color: #FFFFFF;">
         <col span="2" style="background-color: #FFFFFF;">
         <tbody>
         <tr>
-          <th style="width: 40%">引っ越し月</th>
-          <td><span th:text="*{date}"></span></td>
-          <input type="hidden" name="date" id="date" th:value="*{date}"/>
+          <th style="width: 40%">引っ越し日程</th>
+          <td><span th:text="*{dates}"></span></td>
+          <input type="hidden" name="dates" id="dates" th:value="*{dates}"/>
         </tr>
+        </tbody>
+      </table>
+      <div class="sub-title">集荷元・お届け先</div>
+      <table class="table table-bordered">
+        <col span="1" style="background-color: #FFFFFF;">
+        <col span="2" style="background-color: #FFFFFF;">
+        <tbody>
         <tr>
           <th style="width: 40%">転居元住所（都道府県）</th>
           <td>

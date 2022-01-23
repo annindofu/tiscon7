@@ -86,12 +86,13 @@ public class EstimateService {
         int pricePerTruck = estimateDAO.getPricePerTruck(boxes);
 
         //引っ越し日に応じた料金を算出する。
-        String month = dto.getDate();
+        String dates = dto.getDates();
+        String month = dates.substring(5,7);
         double pricedate = 1.0;
 
-        if(month.equals("4")||month.equals("3")){
+        if(month.equals("04")||month.equals("03")){
             pricedate = 1.5;
-        }else if(month.equals("9")){
+        }else if(month.equals("09")){
             pricedate = 1.2;
         }
 
